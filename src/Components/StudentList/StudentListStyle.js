@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const Student = styled.div`
+    width: 100%;
+
     display: flex;
     align-items: center;
 
-    padding: 0.25rem 0.5rem;
+    padding: 0.15rem 0.3rem;
 
-    border-bottom: 1px solid #dfdfdf;
-    border-top: 1px solid #dfdfdf;
+    border-bottom: 2px solid #dfdfdf;
 `;
 
 export const StudentIconDiv = styled.div`

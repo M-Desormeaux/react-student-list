@@ -41,5 +41,5 @@ export const StudentList = (props) => {
         );
     });
 
-    return <div>{students}</div>;
+    return <>{students}</>;
 };

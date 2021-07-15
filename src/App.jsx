@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { AppWrapper, ContentWrapper, GlobalStyle } from "./AppStyle";
-import { StudentList } from "./Components/StudentList";
+import { SearchBar } from "./Components/SearchBar/SearchBar";
+import { StudentList } from "./Components/StudentList/StudentList";
 
 export const App = () => {
     const [apiData, setApiData] = useState([]);
+    const [nameFilter, setNameFilter] = useState("");
 
     // useEffect only runs when the component would mount or update.
     // this allows me to keep the api updated. Could definitely be done better.
@@ -25,12 +27,17 @@ export const App = () => {
         setApiData(data.students);
     }
 
+    searchFilterHandler = (searchFilter) => {
+        setNameFilter(searchFilter);
+    };
+
     const filteredStudents = apiData.filter((student) => true);
 
     return (
         <AppWrapper>
             <GlobalStyle />
             <ContentWrapper>
+                <SearchBar value={nameFilter} onSearch={searchFilterHandler} />
                 <StudentList
                     title="Here is the Data"
                     apiData={filteredStudents}
