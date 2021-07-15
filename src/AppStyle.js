@@ -9,12 +9,15 @@ export const AppWrapper = styled.div`
     width: 100%;
     min-height: 100vh;
 
-    background: black;
+    background: #dfdfdf;
 `;
 
 export const GlobalStyle = createGlobalStyle`
+
     * {
         box-sizing: border-box;
+        padding: 0;
+        margin: 0;
     }
     :root {
         font-size: 16px;
@@ -22,20 +25,23 @@ export const GlobalStyle = createGlobalStyle`
     html, body {
         min-width: 100%;
         min-height: 100vh;
-        padding: 0;
-        margin: 0;
+        font-family: 'Raleway', sans-serif;
     }
 `;
 
 export const ContentWrapper = styled.div`
-    height: 90%;
-    min-height: 800px;
+    height: 570px;
     width: 80%;
-    max-width: 1200px;
+    max-width: 800px;
+
+    border-radius: 8px;
+
+    overflow-y: scroll;
 
     background: whitesmoke;
+    filter: drop-shadow(0 2px 2px #999);
 
-    @media (max-width: 800px) {
-        width: 100%;
+    ::-webkit-scrollbar {
+        width: 0;
     }
 `;

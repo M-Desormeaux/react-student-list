@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { AppWrapper, ContentWrapper, GlobalStyle } from "./AppStyle";
-import { Api } from "./Components/StudentList";
+import { StudentList } from "./Components/StudentList";
 
 export const App = () => {
     const [apiData, setApiData] = useState([]);
 
     // useEffect only runs when the component would mount or update.
-    // this allows me to keep the api updated.Could definitely be done better.
+    // this allows me to keep the api updated. Could definitely be done better.
+    // not a hook I am too familiar with, but allows me to do this more effeciently
     useEffect(() => {
         getData();
     }, []);
@@ -24,11 +25,16 @@ export const App = () => {
         setApiData(data.students);
     }
 
+    const filteredStudents = apiData.filter((student) => true);
+
     return (
         <AppWrapper>
             <GlobalStyle />
             <ContentWrapper>
-                <Api title="Here is the Data" apiData={apiData} />
+                <StudentList
+                    title="Here is the Data"
+                    apiData={filteredStudents}
+                />
             </ContentWrapper>
         </AppWrapper>
     );
