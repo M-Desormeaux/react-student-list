@@ -5,6 +5,7 @@ import { StudentList } from "./Components/StudentList/StudentList";
 
 export const App = () => {
     const [apiData, setApiData] = useState([]);
+    const [tagFilter, setTagFilter] = useState("");
     const [nameFilter, setNameFilter] = useState("");
 
     // useEffect only runs when the component would mount or update.
@@ -27,8 +28,12 @@ export const App = () => {
         setApiData(data.students);
     }
 
-    searchFilterHandler = (searchFilter) => {
+    nameFilterHandler = (searchFilter) => {
         setNameFilter(searchFilter);
+    };
+
+    tagFilterHandler = (searchFilter) => {
+        setTagFilter(searchFilter);
     };
 
     const filteredStudents = apiData.filter((student) => true);
@@ -37,11 +42,12 @@ export const App = () => {
         <AppWrapper>
             <GlobalStyle />
             <ContentWrapper>
-                <SearchBar value={nameFilter} onSearch={searchFilterHandler} />
-                <StudentList
-                    title="Here is the Data"
-                    apiData={filteredStudents}
+                <SearchBar
+                    value={nameFilter}
+                    onNameSearch={nameFilterHandler}
+                    onTagSearch={tagFilterHandler}
                 />
+                <StudentList apiData={filteredStudents} />
             </ContentWrapper>
         </AppWrapper>
     );

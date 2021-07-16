@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const SearchInput = styled.input`
     width: 99%;
 
-    padding: 0.8rem;
+    padding: 0.75rem;
 
     outline: none;
     border: 0;
@@ -12,7 +12,9 @@ export const SearchInput = styled.input`
     background: transparent;
     color: #555;
 
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+
+    font-family: "Raleway", sans-serif;
 
     &:focus,
     &:active {
