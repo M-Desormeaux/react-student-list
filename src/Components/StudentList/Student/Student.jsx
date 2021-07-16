@@ -11,16 +11,28 @@ import {
     StudentInfo,
     ExpandGradesButton,
     StudentContainer,
+    TagInput,
+    TagsDiv,
+    Tags,
+    Tag,
 } from "./StudentStyle";
 
 export const Student = (props) => {
     const [visibility, setVisibility] = useState(false);
+    const [newTag, setNewTag] = useState("");
+    const [tags, setTags] = useState([]);
 
     const student = props.student;
 
     expandGradesHandler = () => {
         setVisibility(!visibility);
     };
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    }
 
     const studentName =
         student.firstName.toUpperCase() + " " + student.lastName.toUpperCase();
@@ -34,10 +46,30 @@ export const Student = (props) => {
         ) / studentGrades.length;
 
     const svgIcon = visibility ? (
-        <FontAwesomeIcon icon={faMinus} size="2x" />
+        <FontAwesomeIcon icon={faMinus} size="2x" color="#aaa" />
     ) : (
-        <FontAwesomeIcon icon={faPlus} size="2x" />
+        <FontAwesomeIcon icon={faPlus} size="2x" color="#aaa" />
     );
+
+    const newTagHandler = (event) => {
+        setNewTag(event.target.value);
+    };
+
+    const addTagHandler = (event) => {
+        if (event.key === "Enter") {
+            setTags([...tags, newTag]);
+            setNewTag("");
+
+            const newStudent = {
+                ...student,
+                tags: [...tags, newTag],
+            };
+
+            // console.log(newStudent);
+
+            props.onNewTag(newStudent);
+        }
+    };
 
     return (
         <StudentContainer key={student.id}>
@@ -60,6 +92,27 @@ export const Student = (props) => {
                             />
                         </>
                     )}
+                    <TagsDiv>
+                        <Tags>
+                            {tags.map((tag) => (
+                                <Tag
+                                    key={`${student.id}_${getRandomInt(
+                                        1,
+                                        9999
+                                    )}${new Date().getTime()}`}
+                                >
+                                    {tag}
+                                </Tag>
+                            ))}
+                        </Tags>
+                        <TagInput
+                            type="text"
+                            onChange={newTagHandler}
+                            onKeyPress={addTagHandler}
+                            value={newTag}
+                            placeholder={"Add a tag"}
+                        />
+                    </TagsDiv>
                 </StudentDetails>
             </StudentInfo>
 

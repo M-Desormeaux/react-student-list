@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SearchInput } from "../../../AppStyle";
 
 export const StudentContainer = styled.div`
     position: relative;
@@ -6,8 +7,6 @@ export const StudentContainer = styled.div`
     width: 100%;
 
     display: flex;
-
-    padding: 0.15rem 0.3rem;
 
     border-bottom: 2px solid #dfdfdf;
 `;
@@ -36,6 +35,7 @@ export const StudentName = styled.div`
 
 export const StudentDetails = styled.div`
     padding: 1rem 0 0 1.5rem;
+    font-size: 0.9rem;
 `;
 
 export const ExpandGradesButton = styled.button`
@@ -44,9 +44,32 @@ export const ExpandGradesButton = styled.button`
     border: 0;
     background: transparent;
 
-    top: 1.5rem;
-    right: 1rem;
+    cursor: pointer;
 
-    width: 40px;
-    height: 40px;
+    top: 1.5rem;
+    right: 1.5rem;
+`;
+
+export const TagsDiv = styled.div`
+    padding: 0;
+`;
+
+export const Tags = styled.div`
+    margin: 0.5rem 0;
+    display: flex;
+`;
+
+export const TagInput = styled(SearchInput)`
+    width: 60%;
+    font-size: 0.8rem;
+    padding: 0.2rem;
+`;
+
+export const Tag = styled.div`
+    margin: 0 0.15rem;
+    padding: 0.55rem 0.5rem;
+    background: #cfcfcf;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    width: fit-content;
 `;

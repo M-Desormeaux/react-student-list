@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { AppWrapper, ContentWrapper, GlobalStyle } from "./AppStyle";
-import { SearchBar } from "./Components/SearchBar/SearchBar";
+import {
+    AppWrapper,
+    ContentWrapper,
+    GlobalStyle,
+    SearchInput,
+} from "./AppStyle";
 import { StudentList } from "./Components/StudentList/StudentList";
 
 export const App = () => {
     const [apiData, setApiData] = useState([]);
-    const [tagFilter, setTagFilter] = useState("");
-    const [nameFilter, setNameFilter] = useState("");
+    const [name, setName] = useState("");
+    const [tag, setTag] = useState("");
 
     // useEffect only runs when the component would mount or update.
     // this allows me to keep the api updated. Could definitely be done better.
@@ -14,8 +18,6 @@ export const App = () => {
     useEffect(() => {
         getData();
     }, []);
-
-    console.log(apiData);
 
     apiUrl = "https://api.hatchways.io/assessment/students";
     // use the ES7 example fetch method
@@ -28,26 +30,52 @@ export const App = () => {
         setApiData(data.students);
     }
 
-    nameFilterHandler = (searchFilter) => {
-        setNameFilter(searchFilter);
+    const setNameHandler = (event) => {
+        setName(event.target.value);
     };
 
-    tagFilterHandler = (searchFilter) => {
-        setTagFilter(searchFilter);
+    const setTagHandler = (event) => {
+        setTag(event.target.value);
     };
 
-    const filteredStudents = apiData.filter((student) => true);
+    const rebuildStudentsHandler = (studentArray) => console.log(studentArray);
+
+    const tagFilteredList = apiData.filter((student) => true);
+
+    const filteredList = tagFilteredList.filter((student) => {
+        if (name == "" && tag == "") {
+            return student;
+        } else if (
+            student.firstName.toLowerCase().includes(name) ||
+            student.lastName.toLowerCase().includes(name)
+        ) {
+            return student;
+        }
+    });
+
+    console.log(name);
+    console.log(tag);
 
     return (
         <AppWrapper>
             <GlobalStyle />
             <ContentWrapper>
-                <SearchBar
-                    value={nameFilter}
-                    onNameSearch={nameFilterHandler}
-                    onTagSearch={tagFilterHandler}
+                <SearchInput
+                    type="text"
+                    value={name}
+                    placeholder={"Search by name"}
+                    onChange={setNameHandler}
                 />
-                <StudentList apiData={filteredStudents} />
+                <SearchInput
+                    type="text"
+                    value={tag}
+                    placeholder={"Search by tag"}
+                    onChange={setTagHandler}
+                />
+                <StudentList
+                    apiData={filteredList}
+                    newApiData={rebuildStudentsHandler}
+                />
             </ContentWrapper>
         </AppWrapper>
     );
