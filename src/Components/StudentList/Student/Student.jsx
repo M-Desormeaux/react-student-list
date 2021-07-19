@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StudentGrades } from "../StudentGrades/StudentGrades";
 import {
     StudentIcon,
@@ -21,6 +21,11 @@ export const Student = (props) => {
     const [visibility, setVisibility] = useState(false);
     const [newTag, setNewTag] = useState("");
     const [tags, setTags] = useState([]);
+
+    // load tags already in student object. this helped merge conflicts i was tasting from the api when adding predefined test tags.
+    useEffect(() => {
+        setTags(student.tags);
+    }, []);
 
     const student = props.student;
 

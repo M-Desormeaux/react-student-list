@@ -4,9 +4,8 @@ import { Student } from "./Student/Student";
 export const StudentList = (props) => {
     const students = props.apiData.map((student) => {
         const newTagHandler = (student) => {
-            // console.log(student);
-
-            props.newApiData(student);
+            const capsulatedData = [student];
+            props.newApiData(capsulatedData);
         };
 
         return (
